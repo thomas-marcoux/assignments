@@ -5,14 +5,20 @@
 
 #include <linux/sched.h>
 
-struct	task_struct	*task;
-struct	list_head	*list;
+void	depth_first_search(struct list_head *head, int depth)	{
+  struct	list_head	*list;
+  struct	task_struct	*task;
+
+  list_for_each(list, head) {
+    task = list_entry(list, struct task_struct, sibling);
+    printk(KERN_INFO "%d -> %s [%lu]", task->pid, task->comm, task->state);
+    depth_first_search(&task->children, depth + 1);
+  }
+}
 
 int simple_init(void) {
   printk(KERN_INFO "Loading Module\n");
-  list_for_each(list, &init_task->children) {
-    task = list_entry(list, struct task_struct, sibling);
-  }
+  depth_first_search(&init_task.children, 0);
   return 0;
 }
 
