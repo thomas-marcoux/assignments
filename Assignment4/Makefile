@@ -1,8 +1,8 @@
 NAME=threads
 
-CC=gcc
+CC=gcc -pthread
 
-CFLAGS=	-c -Wall -g
+CFLAGS=	-c -Wall -g -pthread
 
 RM=	rm -fv
 
