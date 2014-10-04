@@ -15,16 +15,26 @@ class   Satellite(point.Point):
         self.velX = vel * math.cos(self.angle)
         self.velY = vel * math.sin(self.angle)
 
-    def calcDist(self, point):
+    def getDistFromPlanet(self, point):
         return self.calcDistance(point)
 
     def getForce(self, planet):
-        return 1
+        return G * planet.mass / self.getDistFromPlanet(planet)
+        #return G * planet.mass / ((self.getDistFromPlanet(planet))**2)
 
     def getAcceleration(self, planet, friction):
-        return 1
+        return self.getForce(planet) - friction * self.vel
 
     def updatePosition(self, planet, friction):
-        return 1
+        self.posX += 0
+        self.posY += 0
+
+    def updateVelocity(self, planet, friction):
+        self.velX += 0
+        self.velY += 0
+
+    def update(self, planet, friction):
+        self.updatePosition(planet, friction)
+        self.updateVelocity(planet, friction)
 
 Sat = Satellite(planet.Earth)

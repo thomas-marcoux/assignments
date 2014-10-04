@@ -12,8 +12,8 @@ def simulate(velX, velY, friction):
     success = False
     while t < T and not success:
         for body in bodies:
-            sat.Sat.updatePosition(body, friction)
+            sat.Sat.update(body, friction)
             print(body.name)
-            print("dist = %f" % sat.Sat.calcDistance(body))
+            print("force = %f" % sat.Sat.getForce(body))
         success = True
         t += step
