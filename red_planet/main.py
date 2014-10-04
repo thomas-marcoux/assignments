@@ -1,0 +1,3 @@
+import sim
+
+sim.simulate(1.0, 1.0, 1.0)
