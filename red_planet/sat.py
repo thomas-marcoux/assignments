@@ -1,15 +1,22 @@
 import math
 import point
 import planet
+import param
 
 G = 0.7
 
 class   Satellite(point.Point):
-    def __init__(self, home):
+    def __init__(self, home, param):
         super().__init__(home.dist, home.angle)
         self.angle = home.angle - home.vel
         self.setCartesianCoord()
         self.setCartesianVel(1.0)#difference in position of the sat and the planet
+        self.setParam(param)
+
+    def setParam(self, param):
+        self.velX = param.velX
+        self.velY = param.velY
+        self.friction = param.friction
 
     def setCartesianVel(self, vel):
         self.velX = vel * math.cos(self.angle)
@@ -22,19 +29,22 @@ class   Satellite(point.Point):
         return G * planet.mass / self.getDistFromPlanet(planet)
         #return G * planet.mass / ((self.getDistFromPlanet(planet))**2)
 
-    def getAcceleration(self, planet, friction):
-        return self.getForce(planet) - friction * self.vel
+    def updateAcceleration(self, force):
+        self.accX = force - self.friction * self.velX
+        self.accY = force - self.friction * self.velY
 
-    def updatePosition(self, planet, friction):
-        self.posX += 0
-        self.posY += 0
+    def updatePosition(self, time):
+        self.posX += time * self.velX
+        self.posY += time * self.velY
 
-    def updateVelocity(self, planet, friction):
-        self.velX += 0
-        self.velY += 0
+    def updateVelocity(self, time):
+        self.velX += time * self.accX
+        self.velY += time * self.accY
 
-    def update(self, planet, friction):
-        self.updatePosition(planet, friction)
-        self.updateVelocity(planet, friction)
+    def update(self, force, time):
+        self.updateAcceleration(force)
+        self.updatePosition(time)
+        self.updateVelocity(time)
 
-Sat = Satellite(planet.Earth)
+p = param.Parameters(1.0, 1.0, 0.0)
+Sat = Satellite(planet.Earth, p)

@@ -1,9 +1,5 @@
-RM = rm -fv
-
-SRC=	main.py
-
-all:
-	python3 $(SRC)
+all:	
+	python3 main.py
 
 clean:
-	$(RM) *~ *.pyc
+	rm -fv *~ *.pyc

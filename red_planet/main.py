@@ -1,4 +1,7 @@
 import sim
 import search
 
-sim.simulate(1.0, 1.0, 1.0)
+S = 500
+
+search.search(S)
+#sim.simulate(1.0, 1.0, 1.0)
