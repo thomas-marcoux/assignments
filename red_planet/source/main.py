@@ -1,5 +1,3 @@
-import sim
-import sat
 import search
 
 S = 500

@@ -1,5 +1,4 @@
 import math
-import sol
 
 def evaluate(solution):
     cost = solution.distMin * math.pow(10, 5)

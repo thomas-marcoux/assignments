@@ -1,11 +1,11 @@
 INTERPRETER = python3
 RM = rm -fv
 MAIN = main.py
-CLEAN_TARGET = *~ *.pyc
 DIR = source/
+CLEAN_TARGET = $(DIR)*~ $(DIR)*.pyc
 
 all:	
 	$(INTERPRETER) $(DIR)$(MAIN)
 
 clean:
-	$(RM) $(DIR)$(CLEAN_TARGET)
+	$(RM) $(CLEAN_TARGET)
