@@ -31,5 +31,5 @@ def simulate(sat):
             solution.setDistMin(distFromMars)
         rotateAll(bodies)
         t += step
-    solution.setTmin(t)
+    solution.setTmin(t-step)
     return solution
