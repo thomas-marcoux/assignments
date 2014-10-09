@@ -1,0 +1,4 @@
+(DEFUN PARENS (L)
+  (COND ((= (LENGTH L) 1) L)
+	(T (LIST (CAR L) (PARENS (CDR L))))))
+(PARENS '(1 2 (3 4) 5))
