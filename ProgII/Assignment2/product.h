@@ -23,6 +23,7 @@ class	Product
   void	setPrice(double);
   void	setStock(int);
   friend std::ostream& operator<<(std::ostream& out, Product const& p);
+  friend std::istream& operator>>(std::istream& out, Product &p);
 };
 
 #endif
