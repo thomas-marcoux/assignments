@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "tokenList.h"
 
 TokenList::TokenList(std::string& s)
@@ -10,18 +11,13 @@ TokenList::TokenList(std::string& s)
 
 void	TokenList::parseInput(std::string& s)
 {
-  int	length = s.size();
-  int	pos = 0;
-  std::string	tk;
+  std::istringstream	ss(s);
+  std::string	buff;
 
-  for (int i = 0; pos != std::string::npos && i < length; i += pos)
+  while (!ss.eof())
     {
-      pos = s.find(DELIMITER, i, length);
-      if (pos != std::string::npos)
-	tk = s.substr(i, length);
-      else
-	tk = s.substr(i, pos);
-      this->addToken(tk);
+      getline(ss, buff, DELIMITER);
+      this->addToken(buff);
     }
 }
 

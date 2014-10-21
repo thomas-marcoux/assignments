@@ -3,7 +3,7 @@
 
 #include "token.h"
 
-#define DELIMITER " "
+#define DELIMITER ' '
 
 class	TokenList
 {
