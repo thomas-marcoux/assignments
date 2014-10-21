@@ -7,6 +7,7 @@ CFLAGS=	-c -Wall -g -pthread
 RM=	rm -fv
 
 SRC=	token.cpp		\
+	tokenList.cpp		\
 	toPostfix.cpp		\
 	main.cpp
 
