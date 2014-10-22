@@ -8,12 +8,14 @@
 class	TokenList
 {
  public:
+  TokenList();
   TokenList(std::string&);
   ~TokenList();
   void	parseInput(std::string&);
-  void	addToken(std::string&);
   void	addToken(Token*);
+  void	addToken(std::string);
   void	print() const;
+  Token*	getHead() const;
  private:
   Token*	head;
   Token*	tail;

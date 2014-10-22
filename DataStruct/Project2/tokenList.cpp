@@ -2,23 +2,13 @@
 #include <sstream>
 #include "tokenList.h"
 
+TokenList::TokenList()
+  : head(NULL), tail(NULL) {}
+
 TokenList::TokenList(std::string& s)
+  : head(NULL), tail(NULL)
 {
-  head = NULL;
-  tail = NULL;
   this->parseInput(s);
-}
-
-void	TokenList::parseInput(std::string& s)
-{
-  std::istringstream	ss(s);
-  std::string	buff;
-
-  while (!ss.eof())
-    {
-      getline(ss, buff, DELIMITER);
-      this->addToken(buff);
-    }
 }
 
 TokenList::~TokenList()
@@ -33,10 +23,16 @@ TokenList::~TokenList()
     }
 }
 
-void	TokenList::addToken(std::string &s)
+void	TokenList::parseInput(std::string& s)
 {
-  Token	*n = new Token(s);
-  this->addToken(n);    
+  std::istringstream	ss(s);
+  std::string	buff;
+
+  while (!ss.eof())
+    {
+      getline(ss, buff, DELIMITER);
+      this->addToken(buff);
+    }
 }
 
 void	TokenList::addToken(Token *t)
@@ -46,6 +42,17 @@ void	TokenList::addToken(Token *t)
   else
     head = t;
   tail = t;
+}
+
+void	TokenList::addToken(std::string s)
+{
+  Token	*n = new Token(s);
+  this->addToken(n);    
+}
+
+Token*	TokenList::getHead() const
+{
+  return this->head;
 }
 
 void	TokenList::print() const

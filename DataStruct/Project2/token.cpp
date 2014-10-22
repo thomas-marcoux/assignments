@@ -1,7 +1,7 @@
 #include <iostream>
 #include "token.h"
 
-Token::Token(std::string& s)
+Token::Token(std::string const& s)
 {
   this->item = std::string(s);
   this->next = NULL;
@@ -27,4 +27,9 @@ void	Token::addToken(Token* t)
 void	Token::print() const
 {
   std::cout << item << std::endl;
+}
+
+bool	Token::operator==(std::string s)
+{
+  return (this->item == s);
 }

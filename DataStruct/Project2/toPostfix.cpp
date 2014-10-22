@@ -1,12 +1,48 @@
+#include <iostream>
+#include <sstream>
 #include <stack>
 #include "token.h"
 #include "tokenList.h"
 
-Token*	toPostfix(TokenList& tl)
+bool	isNum(std::string s)
 {
-  std::stack<std::string>	stk;
+  std::istringstream	ss(s);
+  int	n;
 
+  if ((ss >> n).fail())
+    return false;
+  return true;
+}
+
+bool	checkOperand(std::string s)
+{
+  return false;
+}
+
+TokenList*	toPostfix(TokenList& tl)
+{
+  TokenList	*postfix = new TokenList();
+  std::stack<std::string>	stk;
+  std::string	item;
+
+  stk.push(std::string("("));
   tl.addToken(std::string(")"));
-  tl.print();
-  return new Token("2");
+  for (Token* it = tl.getHead(); !(stk.empty()) && it; it = it->getNext())
+    {
+      item = it->getItem();
+      if (item == "(")
+	stk.push(item);
+      else if (isNum(item))
+	postfix->addToken(item);
+      else if (item == ")")
+	for (std::string c = stk.top(); c != "("; stk.pop(), c = stk.top())
+	  postfix->addToken(c);
+      else
+	{
+	  for (std::string c = stk.top(); checkOperand(c); stk.pop(), c = stk.top())
+	    postfix->addToken(c);
+	  stk.push(item);
+	}
+    }
+  return postfix;
 }
