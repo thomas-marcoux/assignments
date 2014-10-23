@@ -64,5 +64,8 @@ void	TokenList::print() const
 
 int	TokenList::evalPostfix() const
 {
-  for (Token *it = this->head; it; it = it->getNext());
+  for (Token *it = this->head; it; it = it->getNext())
+    {
+      ;
+    }
 }

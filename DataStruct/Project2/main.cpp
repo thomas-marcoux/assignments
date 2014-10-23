@@ -10,10 +10,13 @@ int	main()
 		       "3 - 4 5",
 		       "( 2 * 3 ) + ( 5 - ( 3 * 2 ) )"
   };
+  TokenList	*postFix;
   for (int i = 0; i < 5; ++i)
     {
       TokenList	l = TokenList(s[i]);
-      (toPostfix(l))->print();;
+      postFix = toPostfix(l);
+      postFix->print();
+      delete postFix;
     }
   return 0;
 }
