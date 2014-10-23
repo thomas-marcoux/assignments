@@ -14,8 +14,10 @@ bool	isNum(std::string s)
   return true;
 }
 
-bool	checkOperand(std::string s)
+bool	checkOperand(std::string top, std::string tk)
 {
+  if (top == "*" || top == "/")
+    return true;
   return false;
 }
 
@@ -39,7 +41,7 @@ TokenList*	toPostfix(TokenList& tl)
 	  postfix->addToken(c);
       else
 	{
-	  for (std::string c = stk.top(); checkOperand(c); stk.pop(), c = stk.top())
+	  for (std::string c = stk.top(); !stk.empty() && checkOperand(c, item); stk.pop(), c = stk.top())
 	    postfix->addToken(c);
 	  stk.push(item);
 	}

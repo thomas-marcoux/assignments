@@ -16,6 +16,7 @@ class	TokenList
   void	addToken(std::string);
   void	print() const;
   Token*	getHead() const;
+  int	evalPostfix() const;
  private:
   Token*	head;
   Token*	tail;

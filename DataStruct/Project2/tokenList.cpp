@@ -59,4 +59,10 @@ void	TokenList::print() const
 {
   for (Token *it = head; it; it = it->getNext())
     it->print();
+  std::cout << std::endl;
+}
+
+int	TokenList::evalPostfix() const
+{
+  for (Token *it = this->head; it; it = it->getNext());
 }
