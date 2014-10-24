@@ -1,3 +1,13 @@
+/*********************************************
+# Thomas Marcoux
+# Programming II
+# Fall 2014
+# Assignment #2
+# This program uses an overloaded >> operator to
+# assign values to a Product instance and then prints
+# the result using an overloaded << operator
+*********************************************/
+
 #include "product.h"
 
 std::ostream&	operator<<(std::ostream& out, Product const& p)
@@ -23,9 +33,9 @@ std::istream&	operator>>(std::istream& in, Product &p)
 
 int	main()
 {
-  Product	p;
+  Product	my_product;
 
-  std::cin >> p;
-  std::cout << p;
+  std::cin >> my_product;
+  std::cout << my_product;
   return 0;
 }

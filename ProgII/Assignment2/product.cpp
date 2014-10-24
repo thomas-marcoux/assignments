@@ -1,4 +1,17 @@
+/*********************************************
+# Thomas Marcoux
+# Programming II
+# Fall 2014
+# Assignment #2
+# This program uses an overloaded >> operator to
+# assign values to a Product instance and then prints
+# the result using an overloaded << operator
+*********************************************/
+
 #include "product.h"
+
+Product::Product()
+  : id(-1), name(""), price(0.0), stock(0) {}
 
 Product::Product(int id, std::string name, double price, int stock)
   : id(id), name(name), price(price), stock(stock) {}

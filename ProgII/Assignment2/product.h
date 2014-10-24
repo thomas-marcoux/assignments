@@ -1,3 +1,13 @@
+/*********************************************
+# Thomas Marcoux
+# Programming II
+# Fall 2014
+# Assignment #2
+# This program uses an overloaded >> operator to
+# assign values to a Product instance and then prints
+# the result using an overloaded << operator
+*********************************************/
+
 #ifndef PRODUCT_H
 #define	PRODUCT_H
 
@@ -13,15 +23,16 @@ class	Product
   int		stock;
   
  public:
-  Product(int = -1, std::string = "", double = 0.0, int = 0);
-  int	getId() const;
+  Product();
+  Product(int, std::string, double, int);
+  int		getId() const;
   std::string	getName() const;
   double	getPrice() const;
-  int	getStock() const;
-  void	setId(int);
-  void	setName(std::string);
-  void	setPrice(double);
-  void	setStock(int);
+  int		getStock() const;
+  void		setId(int);
+  void		setName(std::string);
+  void		setPrice(double);
+  void		setStock(int);
   friend std::ostream& operator<<(std::ostream& out, Product const& p);
   friend std::istream& operator>>(std::istream& out, Product &p);
 };
