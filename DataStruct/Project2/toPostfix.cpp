@@ -28,30 +28,33 @@ TokenList*	toPostfix(TokenList& tl)
 {
   TokenList	*postfix = new TokenList();
   std::stack<std::string>	stk;
-  std::string	item;
+  std::string	item = "";
 
   stk.push(std::string("("));
   tl.addToken(std::string(")"));
-  for (Token* it = tl.getHead(); !(stk.empty()) && it; it = it->getNext())
+  for (Token* it = tl.getHead(); !stk.empty();)
     {
-      item = it->getItem();
+      if (it != NULL)
+	item = it->getItem();
       if (item == "(")
 	stk.push(item);
       else if (isNum(item))
 	postfix->addToken(item);
       else if (item == ")")
-	for (;!stk.empty() && stk.top() != "("; stk.pop())
-	  postfix->addToken(stk.top());
+	{
+	  for (;!stk.empty() && stk.top() != "("; stk.pop())
+	    postfix->addToken(stk.top());
+	  stk.pop();
+	}
       else
 	{
-	  for (;!stk.empty() && checkOperand(stk.top(), item); stk.pop()); 
+	  for (;!stk.empty() && checkOperand(stk.top(), item); stk.pop())
 	       postfix->addToken(stk.top());
-	  stk.push(item);
+	  if (it)
+	    stk.push(item);
 	}
+      if (it)
+	it = it->getNext();
     }
-  /*
-  for (; !stk.empty(); stk.pop())
-    std::cout << stk.top() << std::endl;
-  */
   return postfix;
 }
