@@ -18,6 +18,9 @@ bool	checkOperand(std::string top, std::string tk)
 {
   if (top == "*" || top == "/")
     return true;
+  if ((top == "+" || top == "-")
+      && (tk == "+" || tk == "-"))
+    return true;
   return false;
 }
 
@@ -37,14 +40,18 @@ TokenList*	toPostfix(TokenList& tl)
       else if (isNum(item))
 	postfix->addToken(item);
       else if (item == ")")
-	for (std::string c = stk.top(); c != "("; stk.pop(), c = stk.top())
-	  postfix->addToken(c);
+	for (;!stk.empty() && stk.top() != "("; stk.pop())
+	  postfix->addToken(stk.top());
       else
 	{
-	  for (std::string c = stk.top(); !stk.empty() && checkOperand(c, item); stk.pop(), c = stk.top())
-	    postfix->addToken(c);
+	  for (;!stk.empty() && checkOperand(stk.top(), item); stk.pop()); 
+	       postfix->addToken(stk.top());
 	  stk.push(item);
 	}
     }
+  /*
+  for (; !stk.empty(); stk.pop())
+    std::cout << stk.top() << std::endl;
+  */
   return postfix;
 }

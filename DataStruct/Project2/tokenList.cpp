@@ -50,6 +50,12 @@ void	TokenList::addToken(std::string s)
   this->addToken(n);    
 }
 
+void	TokenList::pushFront(std::string s)
+{
+  Token	*n = new Token(s);
+  this->head = n;
+}
+
 Token*	TokenList::getHead() const
 {
   return this->head;
@@ -62,7 +68,7 @@ void	TokenList::print() const
   std::cout << std::endl;
 }
 
-int	TokenList::evalPostfix() const
+int	TokenList::evalPostfix()
 {
   for (Token *it = this->head; it; it = it->getNext())
     {

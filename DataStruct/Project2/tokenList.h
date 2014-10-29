@@ -14,9 +14,10 @@ class	TokenList
   void	parseInput(std::string&);
   void	addToken(Token*);
   void	addToken(std::string);
+  void	pushFront(std::string);
   void	print() const;
   Token*	getHead() const;
-  int	evalPostfix() const;
+  int	evalPostfix();
  private:
   Token*	head;
   Token*	tail;
