@@ -13,6 +13,7 @@ class	TokenList
   ~TokenList();
   void	parseInput(std::string&);
   void	addToken(Token*);
+  void	addToken(const char*);
   void	addToken(std::string);
   void	pushFront(std::string);
   void	print() const;

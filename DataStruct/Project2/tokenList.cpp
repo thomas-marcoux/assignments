@@ -44,6 +44,12 @@ void	TokenList::addToken(Token *t)
   tail = t;
 }
 
+void	TokenList::addToken(const char *s)
+{
+  Token	*n = new Token(std::string(s));
+  this->addToken(n);    
+}
+
 void	TokenList::addToken(std::string s)
 {
   Token	*n = new Token(s);
