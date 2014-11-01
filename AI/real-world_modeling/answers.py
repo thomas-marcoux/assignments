@@ -1,0 +1,18 @@
+answers = {
+1 : ['not linux based', '7 or less', 'web', 'yes'],
+2 : ['linux based', '7 or less', 'app', 'yes'],
+3 : ['linux based', '7 or less', 'both', 'yes'],
+4 : ['linux based', '7 or less', 'both', 'yes'],
+5 : ['not linux based', '7 or less', 'web', 'yes'],
+6 : ['linux based', '7 or less', 'app', 'no'],
+7 : ['linux based', '7 or less', 'app', 'yes'],
+8 : ['linux based', 'over 7', 'web', 'yes'],
+9 : ['not linux based', '7 or less', 'both', 'no'],
+10 : ['linux based', 'over 7', 'app', 'yes'],
+11 : ['linux based', 'over 7', 'both', 'no'],
+12 : ['linux based', 'over 7', 'both', 'yes'],
+13 : ['not linux based', '7 or less', 'web', 'no'],
+14 : ['linux based', '7 or less', 'web', 'yes'],
+15 : ['linux based', '7 or less', 'both', 'yes'],
+16 : ['not linux based', '7 or less', 'both', 'no'],
+}
