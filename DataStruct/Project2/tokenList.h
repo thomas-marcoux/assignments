@@ -18,6 +18,7 @@ class	TokenList
   void	pushFront(std::string);
   void	print() const;
   Token*	getHead() const;
+  TokenList*	toPostfix();
   int	evalPostfix();
  private:
   Token*	head;
