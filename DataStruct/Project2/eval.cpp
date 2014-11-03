@@ -39,7 +39,7 @@ void	eval(char opt, std::stack<int> &stk)
   if (opt == '*')
     stk.push(n1 * n2);
   if (opt == '/')
-    stk.push(n1 / n2);
+    stk.push(n1 / ((n2 == 0) ? 1 : n2));
 }
 
 int	evalPostfix(TokenList *postFix)

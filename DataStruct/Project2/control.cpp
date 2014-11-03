@@ -39,12 +39,36 @@ bool	isNum(std::string s)
   return true;
 }
 
+bool	matchingParenthese(const TokenList *tl)
+{
+  std::string	item;
+  int	n = 0;
+  for (Token* it = tl->getHead(); it ; it = it->getNext())
+    {
+      item = it->getItem();
+      if (item == ")")
+	++n;
+      if (item == "(")
+	--n;
+    }
+  return (n) ? false : true;
+}
+
 State	transition(std::string tk, State e)
 {
+  if (e == STATE4)
+    {
+      if (isNum(tk) && (getNum(tk) == 0))
+	return STATE0;
+      else
+	e = STATE3;
+    }
   if ((e == STATE1 || e == STATE3) && tk[0] == '(')
     return STATE1;
   if ((e == STATE1 || e == STATE3) && isNum(tk))
     return STATE2;
+  if (e == STATE2 && tk[0] == '/')
+    return STATE4;
   if (e == STATE2 && (isOpr(tk[0])))
     return STATE3;
   if (e == STATE2 && tk[0] == ')')
@@ -57,6 +81,9 @@ State	transition(std::string tk, State e)
 bool	checkTokenList(const TokenList *tl)
 {
   State	e = STATE1;
+
+  if (!matchingParenthese(tl))
+    return false;
   for (Token* it = tl->getHead(); it && (e = transition(it->getItem(), e)); it = it->getNext());
   return (e == STATE2);
 }

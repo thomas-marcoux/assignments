@@ -20,7 +20,8 @@ enum	State {
   STATE0,
   STATE1,
   STATE2,
-  STATE3
+  STATE3,
+  STATE4
 };
 
 class	TokenList
@@ -57,6 +58,7 @@ bool	isNum(std::string);
 bool	checkTokenList(const TokenList*);
 
 /* eval */
+int	getNum(std::string s);
 int	evalPostfix(TokenList*);
 
 #endif

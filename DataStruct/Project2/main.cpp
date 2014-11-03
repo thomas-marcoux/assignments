@@ -15,22 +15,45 @@
 
 int	main(int argc, char **argv)
 {
+  std::string	s[] = {
+    "2+2",
+    "42",
+    "4 2",
+    "4/2",
+    "(4/2", //5
+    "4//2",
+    "4/2)",
+    "(4/2))",
+    "4/0",
+    "004*003", //10
+    "1+2-4",
+    "10*(2+3)",
+    "10/3+2-(5*(2-3))+45",
+    "3-4 5",
+    "(2*3)+(5-(3*2))" //15
+  };
   TokenList	*postFix;
-  if (argc > 1)
+  int	n = 15;
+
+  if (argc == 2)
     {
-      std::string	expr(argv[1]);
-      TokenList	l = TokenList(expr);
-      std::cout << "Infix:" << std::endl;
-      l.print();      
+      n = 1;
+      s[0] = argv[1];
+    }
+  if (argc > 2)
+    {
+      std::cout << "Usage: " << argv[0] << " <expression>" << std::endl;
+      return 0;
+    }
+  for (int i = 0; i < n; ++i)
+    {
+      TokenList	l = TokenList(s[i]);
       postFix = toPostfix(&l);
       if (postFix)
 	{
-	  std::cout << "Postfix:" << std::endl;
-	  postFix->print();
-	  std::cout << "Result = " << evalPostfix(postFix) << std::endl;
+	  std::cout << s[i] << " = " << evalPostfix(postFix) << std::endl;
 	  delete postFix;
 	}
-      std::cout << std::endl;
     }
   return 0;
 }
