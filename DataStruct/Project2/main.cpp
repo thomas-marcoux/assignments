@@ -13,20 +13,13 @@
 #include <iostream>
 #include "tokenList.h"
 
-int	main()
+int	main(int argc, char **argv)
 {
-  std::string	s[] = {
-      "1+2-4",
-      "10*(2+3)",
-      "10/3+2-5*(2-3)+45",
-      "3-4 5",
-      "(2*3)+(5-(3*2))"
-  };
   TokenList	*postFix;
-
-  for (int i = 0; i < 5; ++i)
+  if (argc > 1)
     {
-      TokenList	l = TokenList(s[i]);
+      std::string	expr(argv[1]);
+      TokenList	l = TokenList(expr);
       std::cout << "Infix:" << std::endl;
       l.print();      
       postFix = toPostfix(&l);

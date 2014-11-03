@@ -38,7 +38,7 @@ void	Token::addToken(Token* t)
 
 void	Token::print() const
 {
-  std::cout << item;
+  std::cout << item << " ";
 }
 
 bool	Token::operator==(std::string s)
