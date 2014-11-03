@@ -36,15 +36,35 @@ TokenList::~TokenList()
     }
 }
 
+bool	isNum(char c)
+{
+  return (c >= 48 && c <= 57);
+}
+bool	isToken(char c)
+{
+  return ((isNum(c)) || c == '(' || c == ')' ||
+	  c == '+' || c == '-' || c == '*' || c == '/');
+}
+
 void	TokenList::parseInput(std::string& s)
 {
-  std::istringstream	ss(s);
   std::string	buff;
+  int	l = s.length();
 
-  while (!ss.eof())
+  for (int i = 0; i < l;)
     {
-      getline(ss, buff, DELIMITER);
-      this->addToken(buff);
+      if (isToken(s[i]))
+	{
+	  buff.clear();
+	  if (isNum(s[i]))
+	    while (isNum(s[i]))
+	      buff += s[i++];
+	  else
+	    buff = s[i++];
+	  this->addToken(buff);
+	}
+      else
+	++i;
     }
 }
 
