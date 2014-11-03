@@ -8,16 +8,13 @@ def     parent(network, event):
                 p += i
     return p
 
-def     sample(answer, event, parent):
-    print(answer[event])
-    print(answer[parent])
+def     randomSample(answers, network, event):
+    n = random.randrange(len(answers)) + 1
+    return answers[n][event]
 
-def     prior_sampling(answers, network):
+def     prior_sampling(answers, network, jointDis):
     x = {}
-    print(parent(network, 'D'))
-    for i in answers:
-        n = random.randrange(len(answers)) + 1
-        x[i] = answers[n]
-        #sample(answers[n], 'D', 'C')
+    for i in jointDis:
+        x[i] = randomSample(answers, network, i)
     return x
 
