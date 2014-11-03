@@ -16,12 +16,18 @@
 #include "tokenList.h"
 
 TokenList::TokenList()
-  : head(NULL), tail(NULL) {}
+  : head(NULL), tail(NULL), valid(true) {}
 
 TokenList::TokenList(std::string& s)
-  : head(NULL), tail(NULL)
+  : head(NULL), tail(NULL), valid(true)
 {
   this->parseInput(s);
+  if (!(this->checkTokenList()))
+    {
+      std::cout << "Expression '" << s
+		<< "' is invalid" << std::endl;
+      this->valid = false;
+    }
 }
 
 TokenList::~TokenList()
@@ -40,10 +46,26 @@ bool	isNum(char c)
 {
   return (c >= 48 && c <= 57);
 }
+
+bool	isOpr(char c)
+{
+  return (c == '+' || c == '-' || c == '*' || c == '/');
+}
+
 bool	isToken(char c)
 {
   return ((isNum(c)) || c == '(' || c == ')' ||
-	  c == '+' || c == '-' || c == '*' || c == '/');
+	  isOpr(c));
+}
+
+bool	isNum(std::string s)
+{
+  std::istringstream	ss(s);
+  int	n;
+
+  if ((ss >> n).fail())
+    return false;
+  return true;
 }
 
 void	TokenList::parseInput(std::string& s)
@@ -66,6 +88,28 @@ void	TokenList::parseInput(std::string& s)
       else
 	++i;
     }
+}
+
+State	transition(std::string tk, State e)
+{
+  if ((e == STATE1 || e == STATE3) && tk[0] == '(')
+    return STATE1;
+  if ((e == STATE1 || e == STATE3) && isNum(tk))
+    return STATE2;
+  if (e == STATE2 && (isOpr(tk[0])))
+    return STATE3;
+  if (e == STATE2 && tk[0] == ')')
+    return STATE2;
+  if (e == STATE3 && tk[0] == '(')
+    return STATE1;
+  return STATE0;
+}
+
+bool	TokenList::checkTokenList() const
+{
+  State	e = STATE1;
+  for (Token* it = this->head; it && (e = transition(it->getItem(), e)); it = it->getNext());
+  return (e == STATE2);
 }
 
 void	TokenList::addToken(Token *t)
@@ -107,16 +151,6 @@ void	TokenList::print() const
   std::cout << std::endl;
 }
 
-bool	isNum(std::string s)
-{
-  std::istringstream	ss(s);
-  int	n;
-
-  if ((ss >> n).fail())
-    return false;
-  return true;
-}
-
 int	getNum(std::string s)
 {
   std::istringstream	ss(s);
@@ -154,6 +188,8 @@ void	popOperands(std::stack<std::string> &stk, TokenList *postfix,
 
 TokenList*	TokenList::toPostfix()
 {
+  if (!valid)
+    return NULL;
   TokenList	*postfix = new TokenList();
   std::stack<std::string>	stk;
   std::string	item = "";

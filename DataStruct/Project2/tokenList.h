@@ -15,7 +15,13 @@
 
 #include "token.h"
 
-#define DELIMITER ' '
+
+enum	State {
+  STATE0,
+  STATE1,
+  STATE2,
+  STATE3
+};
 
 class	TokenList
 {
@@ -24,6 +30,7 @@ class	TokenList
   TokenList(std::string&);
   ~TokenList();
   void	parseInput(std::string&);
+  bool	checkTokenList() const;
   void	addToken(Token*);
   void	addToken(const char*);
   void	addToken(std::string);
@@ -35,6 +42,7 @@ class	TokenList
  private:
   Token*	head;
   Token*	tail;
+  bool		valid;
 };
 
 #endif
