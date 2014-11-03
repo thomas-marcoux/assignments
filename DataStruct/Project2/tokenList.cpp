@@ -11,21 +11,18 @@
  */
 
 #include <iostream>
-#include <sstream>
-#include <stack>
 #include "tokenList.h"
 
 TokenList::TokenList()
-  : head(NULL), tail(NULL), valid(true) {}
+  : head(NULL), tail(NULL), valid(true), postfix(false) {}
 
 TokenList::TokenList(std::string& s)
-  : head(NULL), tail(NULL), valid(true)
+  : head(NULL), tail(NULL), valid(true), postfix(false)
 {
   this->parseInput(s);
-  if (!(this->checkTokenList()))
+  if (!(checkTokenList(this)))
     {
-      std::cout << "Expression '" << s
-		<< "' is invalid" << std::endl;
+      std::cout << "Expression '" << s << "' is invalid" << std::endl;
       this->valid = false;
     }
 }
@@ -40,32 +37,6 @@ TokenList::~TokenList()
       delete it;
       it = buff;
     }
-}
-
-bool	isNum(char c)
-{
-  return (c >= 48 && c <= 57);
-}
-
-bool	isOpr(char c)
-{
-  return (c == '+' || c == '-' || c == '*' || c == '/');
-}
-
-bool	isToken(char c)
-{
-  return ((isNum(c)) || c == '(' || c == ')' ||
-	  isOpr(c));
-}
-
-bool	isNum(std::string s)
-{
-  std::istringstream	ss(s);
-  int	n;
-
-  if ((ss >> n).fail())
-    return false;
-  return true;
 }
 
 void	TokenList::parseInput(std::string& s)
@@ -90,28 +61,6 @@ void	TokenList::parseInput(std::string& s)
     }
 }
 
-State	transition(std::string tk, State e)
-{
-  if ((e == STATE1 || e == STATE3) && tk[0] == '(')
-    return STATE1;
-  if ((e == STATE1 || e == STATE3) && isNum(tk))
-    return STATE2;
-  if (e == STATE2 && (isOpr(tk[0])))
-    return STATE3;
-  if (e == STATE2 && tk[0] == ')')
-    return STATE2;
-  if (e == STATE3 && tk[0] == '(')
-    return STATE1;
-  return STATE0;
-}
-
-bool	TokenList::checkTokenList() const
-{
-  State	e = STATE1;
-  for (Token* it = this->head; it && (e = transition(it->getItem(), e)); it = it->getNext());
-  return (e == STATE2);
-}
-
 void	TokenList::addToken(Token *t)
 {
   if (tail)
@@ -121,27 +70,30 @@ void	TokenList::addToken(Token *t)
   tail = t;
 }
 
-void	TokenList::addToken(const char *s)
-{
-  Token	*n = new Token(std::string(s));
-  this->addToken(n);    
-}
-
 void	TokenList::addToken(std::string s)
 {
   Token	*n = new Token(s);
   this->addToken(n);    
 }
 
-void	TokenList::pushFront(std::string s)
-{
-  Token	*n = new Token(s);
-  this->head = n;
-}
-
 Token*	TokenList::getHead() const
 {
-  return this->head;
+  return head;
+}
+
+bool	TokenList::isValid() const
+{
+  return valid;
+}
+
+bool	TokenList::isPostFix() const
+{
+  return postfix;
+}
+
+void	TokenList::setPostFix()
+{
+  postfix = true;
 }
 
 void	TokenList::print() const
@@ -151,117 +103,3 @@ void	TokenList::print() const
   std::cout << std::endl;
 }
 
-int	getNum(std::string s)
-{
-  std::istringstream	ss(s);
-  int	n;
-
-  ss >> n;
-  return n;
-}
-
-bool	checkOperand(std::string top, std::string tk)
-{
-  if (top == "*" || top == "/")
-    return true;
-  if ((top == "+" || top == "-")
-      && (tk == "+" || tk == "-"))
-    return true;
-  return false;
-}
-
-void	popParenthese(std::stack<std::string> &stk, TokenList *postfix)
-{
-  for (;!stk.empty() && stk.top() != "("; stk.pop())
-    postfix->addToken(stk.top());
-  stk.pop();
-}
-
-void	popOperands(std::stack<std::string> &stk, TokenList *postfix,
-		    std::string item, Token* it)
-{
-  for (;!stk.empty() && checkOperand(stk.top(), item); stk.pop())
-    postfix->addToken(stk.top());
-  if (it)
-    stk.push(item);
-}
-
-TokenList*	TokenList::toPostfix()
-{
-  if (!valid)
-    return NULL;
-  TokenList	*postfix = new TokenList();
-  std::stack<std::string>	stk;
-  std::string	item = "";
-
-  stk.push(std::string("("));
-  this->addToken(std::string(")"));
-  for (Token* it = this->getHead(); !stk.empty();)
-    {
-      if (it)
-	item = it->getItem();
-      if (item == "(")
-	stk.push(item);
-      else if (isNum(item))
-	postfix->addToken(item);
-      else if (item == ")")
-	popParenthese(stk, postfix);
-      else
-	popOperands(stk, postfix, item, it);
-      if (it)
-	it = it->getNext();
-    }
-  return postfix;
-}
-
-int	eval(char opt, std::stack<int> &stk)
-{
-  int	n1;
-  int	n2;
-
-  n2 = stk.top();
-  stk.pop();
-  n1 = stk.top();
-  stk.pop();
-  if (opt == '+')
-    stk.push(n1 + n2);
-  else if (opt == '-')
-    stk.push(n1 - n2);
-  else if (opt == '*')
-    stk.push(n1 * n2);
-  else if (opt == '/')
-    stk.push(n1 / n2);
-  else
-    return 0;
-  return 1;
-}
-
-int	TokenList::evalPostfix()
-{
-  std::string	item;
-  std::stack<int>	stk;
-  char	c;
-  int	n;
-
-  for (Token *it = this->head; it; it = it->getNext())
-    {
-      item = it->getItem();
-      if (isNum(item))
-	{
-	  n = getNum(item);
-	  c = '$';
-	}
-      else
-	c = item[0];
-      switch (c)
-	{
-	case '$':
-	  stk.push(n);
-	  break;
-	default:
-	  if (!eval(c, stk))
-	    return 0;
-	}
-    }
-  return stk.top();
-}

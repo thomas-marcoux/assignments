@@ -29,20 +29,34 @@ class	TokenList
   TokenList();
   TokenList(std::string&);
   ~TokenList();
-  void	parseInput(std::string&);
-  bool	checkTokenList() const;
-  void	addToken(Token*);
-  void	addToken(const char*);
-  void	addToken(std::string);
-  void	pushFront(std::string);
-  void	print() const;
+  void		parseInput(std::string&);
+  void		addToken(Token*);
+  void		addToken(std::string);
+  void		print() const;
   Token*	getHead() const;
+  bool		isValid() const;
+  bool		isPostFix() const;
+  void		setPostFix();
   TokenList*	toPostfix();
-  int	evalPostfix();
+  int		evalPostfix();
  private:
   Token*	head;
   Token*	tail;
   bool		valid;
+  bool		postfix;
 };
+
+/* toPostfix */
+TokenList*	toPostfix(TokenList *);
+
+/* Control */
+bool	isNum(char);
+bool	isOpr(char);
+bool	isToken(char);
+bool	isNum(std::string);
+bool	checkTokenList(const TokenList*);
+
+/* eval */
+int	evalPostfix(TokenList*);
 
 #endif

@@ -8,6 +8,9 @@ RM=	rm -fv
 
 SRC=	token.cpp		\
 	tokenList.cpp		\
+	control.cpp		\
+	toPostfix.cpp		\
+	eval.cpp		\
 	main.cpp
 
 OBJ=	$(SRC:.cpp=.o)

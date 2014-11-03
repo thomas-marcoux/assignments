@@ -21,21 +21,20 @@ int	main()
       "10/3+2-5*(2-3)+45",
       "3-4 5",
       "(2*3)+(5-(3*2))"
-      "(2*3)+(5-(3*2)))"
   };
   TokenList	*postFix;
 
-  for (int i = 0; i < 6; ++i)
+  for (int i = 0; i < 5; ++i)
     {
       TokenList	l = TokenList(s[i]);
-      postFix = l.toPostfix();
+      std::cout << "Infix:" << std::endl;
+      l.print();      
+      postFix = toPostfix(&l);
       if (postFix)
 	{
-	  std::cout << "Infix:" << std::endl;
-	  l.print();      
 	  std::cout << "Postfix:" << std::endl;
 	  postFix->print();
-	  std::cout << "Result = " << postFix->evalPostfix() << std::endl;
+	  std::cout << "Result = " << evalPostfix(postFix) << std::endl;
 	  delete postFix;
 	}
       std::cout << std::endl;
