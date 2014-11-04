@@ -23,6 +23,7 @@ bool	isOpr(char c)
   return (c == '+' || c == '-' || c == '*' || c == '/');
 }
 
+//Returns true if the char c is part of a mathematical expression
 bool	isToken(char c)
 {
   return ((isNum(c)) || c == '(' || c == ')' ||
@@ -39,6 +40,7 @@ bool	isNum(std::string s)
   return true;
 }
 
+//Returns true if the TokenList tl has a valid number of parentheses
 bool	matchingParenthese(const TokenList *tl)
 {
   std::string	item;
@@ -54,6 +56,7 @@ bool	matchingParenthese(const TokenList *tl)
   return (n) ? false : true;
 }
 
+//Check that the TokenList's grammar is correct
 State	transition(std::string tk, State e)
 {
   if (e == STATE4)
@@ -78,12 +81,14 @@ State	transition(std::string tk, State e)
   return STATE0;
 }
 
+//Runs control functions on the TokenList tl to test its validity
 bool	checkTokenList(const TokenList *tl)
 {
   State	e = STATE1;
 
   if (!matchingParenthese(tl))
     return false;
-  for (Token* it = tl->getHead(); it && (e = transition(it->getItem(), e)); it = it->getNext());
+  for (Token* it = tl->getHead();
+       it && (e = transition(it->getItem(), e)); it = it->getNext());
   return (e == STATE2);
 }

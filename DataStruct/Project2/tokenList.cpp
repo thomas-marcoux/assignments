@@ -19,11 +19,10 @@ TokenList::TokenList()
 TokenList::TokenList(std::string& s)
   : head(NULL), tail(NULL), valid(true), postfix(false)
 {
-  this->parseInput(s);
-  if (!(checkTokenList(this)))
+  if (!this->parseInput(s) || !checkTokenList(this))
     {
-      std::cout << "Expression '" << s << "' is invalid" << std::endl;
       this->valid = false;
+      std::cout << "Expression '" << s << "' is invalid" << std::endl;
     }
 }
 
@@ -39,7 +38,8 @@ TokenList::~TokenList()
     }
 }
 
-void	TokenList::parseInput(std::string& s)
+//Cuts the string s into a singly linked list of Tokens
+int	TokenList::parseInput(std::string& s)
 {
   std::string	buff;
   int	l = s.length();
@@ -56,11 +56,15 @@ void	TokenList::parseInput(std::string& s)
 	    buff = s[i++];
 	  this->addToken(buff);
 	}
-      else
+      else if (s[i] == ' ')
 	++i;
+      else
+	return 0;
     }
+  return 1;
 }
 
+//Add a token t at the end of the list
 void	TokenList::addToken(Token *t)
 {
   if (tail)
@@ -70,6 +74,7 @@ void	TokenList::addToken(Token *t)
   tail = t;
 }
 
+//Add a token at the end of the list from a string s
 void	TokenList::addToken(std::string s)
 {
   Token	*n = new Token(s);

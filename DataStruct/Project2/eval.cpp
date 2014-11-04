@@ -23,6 +23,7 @@ int	getNum(std::string s)
   return n;
 }
 
+//Push the result of an operation in the stack stk
 void	eval(char opt, std::stack<int> &stk)
 {
   int	n1;
@@ -42,6 +43,7 @@ void	eval(char opt, std::stack<int> &stk)
     stk.push(n1 / ((n2 == 0) ? 1 : n2));
 }
 
+//Returns the evaluation of the TokenList postfix
 int	evalPostfix(TokenList *postFix)
 {
   if (!postFix->isPostFix())

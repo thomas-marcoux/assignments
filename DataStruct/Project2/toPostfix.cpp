@@ -13,7 +13,8 @@
 #include <stack>
 #include "tokenList.h"
 
-bool	checkOperand(std::string top, std::string tk)
+//Returns a boolean according to operator priority
+bool	checkOperator(std::string top, std::string tk)
 {
   if (top == "*" || top == "/")
     return true;
@@ -23,6 +24,7 @@ bool	checkOperand(std::string top, std::string tk)
   return false;
 }
 
+//Add tokens from stk to postfix until it meets an opening parenthese
 void	popParenthese(std::stack<std::string> &stk, TokenList *postfix)
 {
   for (;!stk.empty() && stk.top() != "("; stk.pop())
@@ -30,15 +32,17 @@ void	popParenthese(std::stack<std::string> &stk, TokenList *postfix)
   stk.pop();
 }
 
-void	popOperands(std::stack<std::string> &stk, TokenList *postfix,
+//Add operators from stk to postfix according to operator priority
+void	popOperators(std::stack<std::string> &stk, TokenList *postfix,
 		    std::string item, Token* it)
 {
-  for (;!stk.empty() && checkOperand(stk.top(), item); stk.pop())
+  for (;!stk.empty() && checkOperator(stk.top(), item); stk.pop())
     postfix->addToken(stk.top());
   if (it)
     stk.push(item);
 }
 
+//Returns the conversion of infix to postfix
 TokenList*	toPostfix(TokenList *infix)
 {
   if (!infix->isValid())
@@ -60,7 +64,7 @@ TokenList*	toPostfix(TokenList *infix)
       else if (item == ")")
 	popParenthese(stk, postfix);
       else
-	popOperands(stk, postfix, item, it);
+	popOperators(stk, postfix, item, it);
       if (it)
 	it = it->getNext();
     }

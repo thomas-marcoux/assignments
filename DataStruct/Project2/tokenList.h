@@ -15,7 +15,6 @@
 
 #include "token.h"
 
-
 enum	State {
   STATE0,
   STATE1,
@@ -30,7 +29,7 @@ class	TokenList
   TokenList();
   TokenList(std::string&);
   ~TokenList();
-  void		parseInput(std::string&);
+  int		parseInput(std::string&);
   void		addToken(Token*);
   void		addToken(std::string);
   void		print() const;

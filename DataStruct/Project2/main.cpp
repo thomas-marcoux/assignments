@@ -13,27 +13,33 @@
 #include <iostream>
 #include "tokenList.h"
 
+//If an input is given, evaluates the input; if not, evaluates the array s
 int	main(int argc, char **argv)
 {
   std::string	s[] = {
     "2+2",
+    "+",
+    ")",
+    "(",
     "42",
     "4 2",
     "4/2",
-    "(4/2", //5
+    "(4/2",
     "4//2",
     "4/2)",
     "(4/2))",
     "4/0",
-    "004*003", //10
+    "004*003",
     "1+2-4",
     "10*(2+3)",
     "10/3+2-(5*(2-3))+45",
     "3-4 5",
-    "(2*3)+(5-(3*2))" //15
+    "(2*3)+(5-(3*2))",
+    "((((6/0003) + 2) * 003) - 3)",
+    "6*(3+1$)"
   };
   TokenList	*postFix;
-  int	n = 15;
+  int	n = 20;
 
   if (argc == 2)
     {
@@ -47,6 +53,7 @@ int	main(int argc, char **argv)
     }
   for (int i = 0; i < n; ++i)
     {
+      std::cout << i+1 << " : ";
       TokenList	l = TokenList(s[i]);
       postFix = toPostfix(&l);
       if (postFix)
