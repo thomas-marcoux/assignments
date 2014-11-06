@@ -8,8 +8,10 @@ RM=	rm -fv
 
 SRC=	token.cpp		\
 	tokenList.cpp		\
+	node.cpp		\
 	control.cpp		\
 	toPostfix.cpp		\
+	toBinaryTree.cpp	\
 	eval.cpp		\
 	main.cpp
 
