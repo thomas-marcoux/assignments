@@ -2,10 +2,10 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #2
-# This program uses an overloaded >> operator to
-# assign values to a Product instance and then prints
-# the result using an overloaded << operator
+# Assignment #3
+# This program displays the information given
+# to instances of classes derived from the
+# Assignment2's Product class.
 *********************************************/
 
 #include "product.h"
@@ -55,4 +55,9 @@ void	Product::setPrice(double new_price)
 void	Product::setStock(int new_stock)
 {
   this->stock = new_stock;
+}
+
+void	Product::print_info() const
+{
+  std::cout << *this;
 }

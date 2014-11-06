@@ -2,10 +2,10 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #2
-# This program uses an overloaded >> operator to
-# assign values to a Product instance and then prints
-# the result using an overloaded << operator
+# Assignment #3
+# This program displays the information given
+# to instances of classes derived from the
+# Assignment2's Product class.
 *********************************************/
 
 #ifndef PRODUCT_H
@@ -16,7 +16,7 @@
 
 class	Product
 {
- private:
+ protected:
   int		id;
   std::string	name;
   double	price;
@@ -25,14 +25,15 @@ class	Product
  public:
   Product();
   Product(int, std::string, double, int);
-  int		getId() const;
-  std::string	getName() const;
-  double	getPrice() const;
-  int		getStock() const;
+  int		getId(void) const;
+  std::string	getName(void) const;
+  double	getPrice(void) const;
+  int		getStock(void) const;
   void		setId(int);
   void		setName(std::string);
   void		setPrice(double);
   void		setStock(int);
+  void		print_info(void) const;
   friend std::ostream& operator<<(std::ostream& out, Product const& p);
   friend std::istream& operator>>(std::istream& out, Product &p);
 };

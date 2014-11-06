@@ -2,13 +2,14 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #2
-# This program uses an overloaded >> operator to
-# assign values to a Product instance and then prints
-# the result using an overloaded << operator
+# Assignment #3
+# This program displays the information given
+# to instances of classes derived from the
+# Assignment2's Product class.
 *********************************************/
 
-#include "product.h"
+#include "book.h"
+#include "dvd.h"
 
 std::ostream&	operator<<(std::ostream& out, Product const& p)
 {
@@ -33,9 +34,11 @@ std::istream&	operator>>(std::istream& in, Product &p)
 
 int	main()
 {
-  Product	my_product;
+  DVD	my_dvd(1234, "Walking Dead", 33.99, 4, "AMC", "Andrew Lincoln", "Sarah Wayne Callies");
+  Book	my_book(4321, "Slaughterhouse Five", 9.99, 6, "Dial Press", "Kurt Vonnegut", 123456);
 
-  std::cin >> my_product;
-  std::cout << my_product;
+  my_dvd.print_info();
+  std::cout << std::endl;
+  my_book.print_info();
   return 0;
 }
