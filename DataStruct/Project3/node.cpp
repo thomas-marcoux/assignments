@@ -10,6 +10,8 @@
  * Project Revised Date: 8/30/2014, 11/3/2014 
  */
 
+#include <iostream>
+#include <iomanip>
 #include "node.h"
 
 Node::Node(std::string value)
@@ -47,4 +49,58 @@ void	Node::setLeftChild(Node* leftChild)
 void	Node::setRightChild(Node* rightChild)
 {
   this->rightChild = rightChild;
+}
+
+void	Node::printTree(int w) const
+{
+  if (!this)
+    return;
+  Node*	l = this->getLeftChild();
+  Node*	r = this->getRightChild();
+
+  std::cout << std::setw(w);
+  std::cout << this->getValue();
+  if (l || r)
+    std::cout << ":";
+  std::cout << std::endl;
+  w += 2;
+  l->printTree(w);
+  r->printTree(w);
+}
+
+void	Node::printInfix() const
+{
+  if (!this)
+    return;
+  Node*	l = this->getLeftChild();
+  Node*	r = this->getRightChild();
+
+  l->printInfix();
+  std::cout << this->getValue();
+  r->printInfix();
+  std::cout << " ";
+}
+
+void	Node::printPostfix() const
+{
+  if (!this)
+    return;
+  Node*	l = this->getLeftChild();
+  Node*	r = this->getRightChild();
+
+  l->printPostfix();
+  r->printPostfix();
+  std::cout << this->getValue();
+  std::cout << " ";
+}
+
+void	Node::printPrefix() const
+{
+  Node*	l = this->getLeftChild();
+  Node*	r = this->getRightChild();
+
+  while (0)
+    {
+
+    }
 }

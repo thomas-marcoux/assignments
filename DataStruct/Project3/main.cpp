@@ -15,7 +15,7 @@
 #include "node.h"
 
 Node*	toBinaryTree(TokenList* tl);
-void	printTree(Node* root, int = 0);
+int	evalBinaryTree(Node* root);
 
 //If an input is given, evaluates the input; if not, evaluates the array s
 int	main(int argc, char **argv)
@@ -63,11 +63,16 @@ int	main(int argc, char **argv)
       postFix = toPostfix(&l);
       if (postFix)
 	{
-	  std::cout << "Postfix eval = " << evalPostfix(postFix)
-		    << std::endl;
 	  root = toBinaryTree(postFix);
-	  std::cout << "Tree = " << std::endl;
-	  printTree(root);
+	  //std::cout << "Tree = " << std::endl;
+	  //root->printTree();
+	  std::cout << "Infix = " << std::endl;
+	  root->printInfix();
+	  std::cout << std::endl << "Postfix = " << std::endl;
+	  root->printPostfix();
+	  std::cout << std::endl << "Prefix = " << std::endl;
+	  root->printPrefix();
+	  std::cout << std::endl << "Result = " << evalBinaryTree(root) << std::endl;
 	  delete postFix;
 	  delete root;
 	}

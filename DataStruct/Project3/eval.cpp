@@ -11,8 +11,8 @@
  */
 
 #include <sstream>
-#include <stack>
 #include "tokenList.h"
+#include "node.h"
 
 int	getNum(std::string s)
 {
@@ -23,54 +23,24 @@ int	getNum(std::string s)
   return n;
 }
 
-//Push the result of an operation in the stack stk
-void	eval(char opt, std::stack<int> &stk)
+//Returns the evaluation of the Binary Tree
+int	evalBinaryTree(Node* root)
 {
-  int	n1;
-  int	n2;
-
-  n2 = stk.top();
-  stk.pop();
-  n1 = stk.top();
-  stk.pop();
-  if (opt == '+')
-    stk.push(n1 + n2);
-  if (opt == '-')
-    stk.push(n1 - n2);
-  if (opt == '*')
-    stk.push(n1 * n2);
-  if (opt == '/')
-    stk.push(n1 / ((n2 == 0) ? 1 : n2));
-}
-
-//Returns the evaluation of the TokenList postfix
-int	evalPostfix(TokenList *postFix)
-{
-  if (!postFix->isPostFix())
+  if (!root)
     return 0;
-  std::string	item;
-  std::stack<int>	stk;
-  char	c;
-  int	n;
-
-  for (Token *it = postFix->getHead(); it; it = it->getNext())
-    {
-      item = it->getItem();
-      if (isNum(item))
-	{
-	  n = getNum(item);
-	  c = '$';
-	}
-      else
-	c = item[0];
-      switch (c)
-	{
-	case '$':
-	  stk.push(n);
-	  break;
-	default:
-	  eval(c, stk);
-	}
-    }
-  return stk.top();
+  if (isNum(root->getValue()))
+    return getNum(root->getValue());
+  if (root->getValue() == "+")
+    return (evalBinaryTree(root->getLeftChild())
+	    + evalBinaryTree(root->getRightChild()));
+  if (root->getValue() == "-")
+    return (evalBinaryTree(root->getLeftChild())
+	    - evalBinaryTree(root->getRightChild()));
+  if (root->getValue() == "*")
+    return (evalBinaryTree(root->getLeftChild())
+	    * evalBinaryTree(root->getRightChild()));
+  if (root->getValue() == "/")
+    return (evalBinaryTree(root->getLeftChild())
+	    / evalBinaryTree(root->getRightChild()));
+  return 0;
 }

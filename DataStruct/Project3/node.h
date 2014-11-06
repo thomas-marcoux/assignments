@@ -31,6 +31,10 @@ class	Node
   Node*	getRightChild(void) const;
   void	setLeftChild(Node*);
   void	setRightChild(Node*);
+  void	printTree(int = 0) const;
+  void	printInfix(void) const;
+  void	printPostfix(void) const;
+  void	printPrefix(void) const;
 };
 
 #endif

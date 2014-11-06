@@ -10,49 +10,22 @@
  * Project Revised Date: 8/30/2014, 11/3/2014 
  */
 
-#include <iostream>
-#include <iomanip>
 #include <stack>
 #include "tokenList.h"
 #include "node.h"
 
-void	printTree(Node* root, int w = 0)
+//Sets the two children of the Node buff from the stack stk
+void	setChildren(Node* buff, std::stack<Node*> &stk)
 {
-  if (!root)
-    return;
-  std::cout << std::setw(w);
-  std::cout << root->getValue();
-  if (root->getLeftChild() || root->getRightChild())
-    std::cout << ":";
-  std::cout << std::endl;
-  w += 2;
-  printTree(root->getLeftChild(), w);
-  printTree(root->getRightChild(), w);
-}
-
-void	setChild(Node* buff, std::stack<Node*> &stk)
-{
-  if (!buff->getLeftChild())
-    buff->setLeftChild(stk.top());
-  else
-    buff->setRightChild(stk.top());
+  buff->setRightChild(stk.top());
+  stk.pop();
+  buff->setLeftChild(stk.top());
   stk.pop();
 }
 
-void	setChildren(Node* buff, std::stack<Node*> &stk)
-{
-  if (buff->getLeftChild() && buff->getRightChild())
-    return;
-  if (!stk.empty())
-    setChild(buff, stk);
-  else
-    setChild(buff, stk);
-  setChildren(buff, stk);
-}
-
+//Returns the root of a binary tree given a postfix expression
 Node*	toBinaryTree(TokenList* tl)
 {
-  Node*	root = NULL;
   Node*	buff = NULL;
   std::string	item;
   std::stack<Node*>	stk;
@@ -64,10 +37,7 @@ Node*	toBinaryTree(TokenList* tl)
       item = it->getItem();
       buff = new Node(item);
       if (!isNum(item))
-	{
-	  setChildren(buff, stk);
-	  root = buff;
-	}
+	setChildren(buff, stk);
       stk.push(buff);
     }
   return stk.top();
