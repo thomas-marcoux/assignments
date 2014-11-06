@@ -10,18 +10,18 @@
 
 #include "book.h"
 
-Book::Book()
+book::book()
   : Product(), publisher("unknown"), author("unknown"), isbn(-1) {}
 
-Book::Book(int id, std::string name, double price, int stock)
+book::book(int id, std::string name, double price, int stock)
   : Product(id, name, price, stock),
     publisher("unknown"), author("unknown"), isbn(-1) {}
 
-Book::Book(int id, std::string name, double price, int stock,
+book::book(int id, std::string name, double price, int stock,
 	   std::string publi, std::string author, int isbn)
   : Product(id, name, price, stock), publisher(publi), author(author), isbn(isbn) {}
 
-void	Book::print_info() const
+void	book::print_info() const
 {
   std::cout << "Book:" << std::endl;
   Product::print_info();

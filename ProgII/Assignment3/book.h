@@ -13,7 +13,7 @@
 
 #include "product.h"
 
-class	Book : public Product
+class	book : public Product
 {
  private:
   std::string	publisher;
@@ -21,9 +21,9 @@ class	Book : public Product
   int		isbn;
 
  public:
-  Book();
-  Book(int, std::string, double, int);
-  Book(int, std::string, double, int, std::string, std::string, int);
+  book();
+  book(int, std::string, double, int);
+  book(int, std::string, double, int, std::string, std::string, int);
   void	print_info(void) const;
 };
 

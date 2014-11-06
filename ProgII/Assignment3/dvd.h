@@ -13,7 +13,7 @@
 
 #include "product.h"
 
-class	DVD : public Product
+class	dvd : public Product
 {
  private:
   std::string	studio;
@@ -21,9 +21,9 @@ class	DVD : public Product
   std::string	fLead;
 
  public:
-  DVD();
-  DVD(int, std::string, double, int);
-  DVD(int, std::string, double, int, std::string, std::string, std::string);
+  dvd();
+  dvd(int, std::string, double, int);
+  dvd(int, std::string, double, int, std::string, std::string, std::string);
   void	print_info(void) const;
 };
 

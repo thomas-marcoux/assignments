@@ -34,11 +34,9 @@ std::istream&	operator>>(std::istream& in, Product &p)
 
 int	main()
 {
-  DVD	my_dvd(1234, "Walking Dead", 33.99, 4, "AMC", "Andrew Lincoln", "Sarah Wayne Callies");
-  Book	my_book(4321, "Slaughterhouse Five", 9.99, 6, "Dial Press", "Kurt Vonnegut", 123456);
-
+  dvd	my_dvd(1234, "Walking Dead", 33.99, 4, "AMC", "Andrew Lincoln", "Sarah Wayne Callies");
   my_dvd.print_info();
-  std::cout << std::endl;
+  book	my_book(4321, "Slaughterhouse Five", 9.99, 6, "Dial Press", "Kurt Vonnegut", 123456);
   my_book.print_info();
-  return 0;
+  return 1;
 }

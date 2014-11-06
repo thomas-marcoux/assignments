@@ -10,18 +10,18 @@
 
 #include "dvd.h"
 
-DVD::DVD()
+dvd::dvd()
   : Product(), studio("unknown"), mLead("unknown"), fLead("unknown") {}
 
-DVD::DVD(int id, std::string name, double price, int stock)
+dvd::dvd(int id, std::string name, double price, int stock)
   : Product(id, name, price, stock), studio("unknown"),
     mLead("unknown"), fLead("unknown") {}
 
-DVD::DVD(int id, std::string name, double price, int stock,
+dvd::dvd(int id, std::string name, double price, int stock,
 	 std::string studio, std::string mLead, std::string fLead)
   : Product(id, name, price, stock), studio(studio), mLead(mLead), fLead(fLead) {}
 
-void	DVD::print_info() const
+void	dvd::print_info() const
 {
   std::cout << "DVD:" << std::endl;
   Product::print_info();
