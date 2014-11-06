@@ -12,6 +12,10 @@
 
 #include <iostream>
 #include "tokenList.h"
+#include "node.h"
+
+Node*	toBinaryTree(TokenList* tl);
+void	printTree(Node* root, int = 0);
 
 //If an input is given, evaluates the input; if not, evaluates the array s
 int	main(int argc, char **argv)
@@ -40,6 +44,7 @@ int	main(int argc, char **argv)
   };
   TokenList	*postFix;
   int	n = 20;
+  Node	*root;
 
   if (argc == 2)
     {
@@ -53,13 +58,18 @@ int	main(int argc, char **argv)
     }
   for (int i = 0; i < n; ++i)
     {
-      std::cout << i+1 << " : ";
+      std::cout << i+1 << " : "	<< "'" << s[i] << "'" << std::endl;
       TokenList	l = TokenList(s[i]);
       postFix = toPostfix(&l);
       if (postFix)
 	{
-	  std::cout << s[i] << " = " << evalPostfix(postFix) << std::endl;
+	  std::cout << "Postfix eval = " << evalPostfix(postFix)
+		    << std::endl;
+	  root = toBinaryTree(postFix);
+	  std::cout << "Tree = " << std::endl;
+	  printTree(root);
 	  delete postFix;
+	  delete root;
 	}
     }
   return 0;

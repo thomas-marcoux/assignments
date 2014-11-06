@@ -24,6 +24,21 @@ Node::~Node()
   delete this->rightChild;
 }
 
+std::string	Node::getValue() const
+{
+  return this->value;
+}
+
+Node*	Node::getLeftChild() const
+{
+  return this->leftChild;
+}
+
+Node*	Node::getRightChild() const
+{
+  return this->rightChild;
+}
+
 void	Node::setLeftChild(Node* leftChild)
 {
   this->leftChild = leftChild;

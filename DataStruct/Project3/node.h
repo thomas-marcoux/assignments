@@ -26,6 +26,9 @@ class	Node
   Node(std::string);
   Node(std::string, Node*, Node*);
   ~Node();
+  std::string	getValue(void) const;
+  Node*	getLeftChild(void) const;
+  Node*	getRightChild(void) const;
   void	setLeftChild(Node*);
   void	setRightChild(Node*);
 };
