@@ -23,7 +23,7 @@ book::book(std::string name, std::string price, std::string stock,
 
 void	book::print_info() const
 {
-  std::cout << "Book:" << std::endl;
+  std::cout << "Book" << std::endl;
   Product::print_info();
   std::cout << "Publisher: " << this->publisher << std::endl
 	    << "Author: " << this->author << std::endl

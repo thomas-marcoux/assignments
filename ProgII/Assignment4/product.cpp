@@ -14,23 +14,23 @@ int	Product::nb_products = 0;
 int	Product::next_id = 0;
 
 Product::Product()
-  : id(next_id++), name(""), price("0.0"), stock("0")
+  : id(++next_id), name(""), price("0.0"), stock("0")
 {
-  std::cout << name << " = Product Creation" << std::endl;
   ++(Product::nb_products);
+  std::cout << name << " Creation (" << nb_products << " products)" << std::endl;
 }
 
 Product::Product(std::string name, std::string price, std::string stock)
-  : id(next_id++), name(name), price(price), stock(stock)
+  : id(++next_id), name(name), price(price), stock(stock)
 {
-  std::cout << name << " = Product Creation" << std::endl;
   ++(Product::nb_products);
+  std::cout << name << " Creation (" << nb_products << " products)" << std::endl;
 }
 
 Product::~Product()
 {
-  std::cout << name << " = Product Destruction" << std::endl;
   --(Product::nb_products);
+  std::cout << name << " Destruction (" << nb_products << " products)" << std::endl;
 }
 
 int	Product::getId() const
