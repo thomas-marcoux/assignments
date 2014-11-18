@@ -18,12 +18,13 @@ class	book : public Product
  private:
   std::string	publisher;
   std::string	author;
-  int		isbn;
+  std::string	isbn;
 
  public:
   book();
-  book(int, std::string, double, int);
-  book(int, std::string, double, int, std::string, std::string, int);
+  book(std::string, std::string, std::string);
+  book(std::string, std::string, std::string,
+       std::string, std::string, std::string);
   void	print_info(void) const;
 };
 

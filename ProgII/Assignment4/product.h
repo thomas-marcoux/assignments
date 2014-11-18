@@ -19,20 +19,26 @@ class	Product
  protected:
   int		id;
   std::string	name;
-  double	price;
-  int		stock;
+  std::string	price;
+  std::string	stock;
   
+ private:
+  static int	nb_products;
+  static int	next_id;
+
  public:
   Product();
-  Product(int, std::string, double, int);
+  Product(std::string, std::string, std::string);
+  ~Product();
   int		getId(void) const;
   std::string	getName(void) const;
-  double	getPrice(void) const;
-  int		getStock(void) const;
+  std::string	getPrice(void) const;
+  std::string	getStock(void) const;
+  static int	getNbProducts(void) {return nb_products;}
   void		setId(int);
   void		setName(std::string);
-  void		setPrice(double);
-  void		setStock(int);
+  void		setPrice(std::string);
+  void		setStock(std::string);
   void		print_info(void) const;
   friend std::ostream& operator<<(std::ostream& out, Product const& p);
   friend std::istream& operator>>(std::istream& out, Product &p);

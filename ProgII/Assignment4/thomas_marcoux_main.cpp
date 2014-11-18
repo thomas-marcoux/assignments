@@ -1,15 +1,8 @@
-/*********************************************
-# Thomas Marcoux
-# Programming II
-# Fall 2014
-# Assignment #3
-# This program displays the information given
-# to instances of classes derived from the
-# Assignment2's Product class.
-*********************************************/
-
-#include "book.h"
+#include "product.h"
 #include "dvd.h"
+#include "book.h"
+#include <vector>
+#include <fstream>
 
 std::ostream&	operator<<(std::ostream& out, Product const& p)
 {
@@ -32,11 +25,44 @@ std::istream&	operator>>(std::istream& in, Product &p)
   return in;
 }
 
+void	read_books(std::string book_file_name,
+		   std::vector<book> &my_books)
+{
+  std::ifstream	in(book_file_name.c_str());
+  std::string	name, price, stock, publisher, author, isbn;
+
+  if (!in.is_open())
+    return;
+  while (in >> name >> price >> stock >> publisher >> author >> isbn)
+    my_books.push_back
+      (*(new book(name, price, stock, publisher, author, isbn)));
+}
+
+void	read_dvds(std::string dvd_file_name,
+		  std::vector<dvd> &my_dvds)
+{
+  std::ifstream	in(dvd_file_name.c_str());
+  std::string	name, price, stock, studio, mLead, fLead;
+
+  if (!in.is_open())
+    return;
+  while (in >> name >> price >> stock >> studio >> mLead >> fLead)
+    my_dvds.push_back
+      (*(new dvd(name, price, stock, studio, mLead, fLead)));
+}
+
 int	main()
 {
-  dvd	my_dvd(1234, "Walking Dead", 33.99, 4, "AMC", "Andrew Lincoln", "Sarah Wayne Callies");
-  my_dvd.print_info();
-  book	my_book(4321, "Slaughterhouse Five", 9.99, 6, "Dial Press", "Kurt Vonnegut", 123456);
-  my_book.print_info();
-  return 1;
+  std::vector<book> all_books;
+  std::vector<dvd> all_dvds;
+  
+  read_books("books.txt", all_books);
+  read_dvds("dvds.txt", all_dvds);
+  std::cout << "# of all instances: "
+	    << Product::getNbProducts() << std::endl;
+  for(int i = 0; i < all_books.size(); i++)
+    all_books[i].print_info();
+  for(int i = 0; i < all_dvds.size(); i++)
+    all_dvds[i].print_info();
+  return 0;
 }

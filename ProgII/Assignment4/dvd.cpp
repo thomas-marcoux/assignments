@@ -13,13 +13,13 @@
 dvd::dvd()
   : Product(), studio("unknown"), mLead("unknown"), fLead("unknown") {}
 
-dvd::dvd(int id, std::string name, double price, int stock)
-  : Product(id, name, price, stock), studio("unknown"),
+dvd::dvd(std::string name, std::string price, std::string stock)
+  : Product(name, price, stock), studio("unknown"),
     mLead("unknown"), fLead("unknown") {}
 
-dvd::dvd(int id, std::string name, double price, int stock,
+dvd::dvd(std::string name, std::string price, std::string stock,
 	 std::string studio, std::string mLead, std::string fLead)
-  : Product(id, name, price, stock), studio(studio), mLead(mLead), fLead(fLead) {}
+  : Product(name, price, stock), studio(studio), mLead(mLead), fLead(fLead) {}
 
 void	dvd::print_info() const
 {

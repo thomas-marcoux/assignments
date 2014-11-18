@@ -11,15 +11,15 @@
 #include "book.h"
 
 book::book()
-  : Product(), publisher("unknown"), author("unknown"), isbn(-1) {}
+  : Product(), publisher("unknown"), author("unknown"), isbn("-1") {}
 
-book::book(int id, std::string name, double price, int stock)
-  : Product(id, name, price, stock),
-    publisher("unknown"), author("unknown"), isbn(-1) {}
+book::book(std::string name, std::string price, std::string stock)
+  : Product(name, price, stock),
+    publisher("unknown"), author("unknown"), isbn("-1") {}
 
-book::book(int id, std::string name, double price, int stock,
-	   std::string publi, std::string author, int isbn)
-  : Product(id, name, price, stock), publisher(publi), author(author), isbn(isbn) {}
+book::book(std::string name, std::string price, std::string stock,
+	   std::string publi, std::string author, std::string isbn)
+  : Product(name, price, stock), publisher(publi), author(author), isbn(isbn) {}
 
 void	book::print_info() const
 {

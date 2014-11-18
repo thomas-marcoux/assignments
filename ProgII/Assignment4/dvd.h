@@ -22,8 +22,9 @@ class	dvd : public Product
 
  public:
   dvd();
-  dvd(int, std::string, double, int);
-  dvd(int, std::string, double, int, std::string, std::string, std::string);
+  dvd(std::string, std::string, std::string);
+  dvd(std::string, std::string, std::string,
+      std::string, std::string, std::string);
   void	print_info(void) const;
 };
 

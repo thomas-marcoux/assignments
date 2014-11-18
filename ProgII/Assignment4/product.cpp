@@ -10,11 +10,28 @@
 
 #include "product.h"
 
-Product::Product()
-  : id(-1), name(""), price(0.0), stock(0) {}
+int	Product::nb_products = 0;
+int	Product::next_id = 0;
 
-Product::Product(int id, std::string name, double price, int stock)
-  : id(id), name(name), price(price), stock(stock) {}
+Product::Product()
+  : id(next_id++), name(""), price("0.0"), stock("0")
+{
+  std::cout << name << " = Product Creation" << std::endl;
+  ++(Product::nb_products);
+}
+
+Product::Product(std::string name, std::string price, std::string stock)
+  : id(next_id++), name(name), price(price), stock(stock)
+{
+  std::cout << name << " = Product Creation" << std::endl;
+  ++(Product::nb_products);
+}
+
+Product::~Product()
+{
+  std::cout << name << " = Product Destruction" << std::endl;
+  --(Product::nb_products);
+}
 
 int	Product::getId() const
 {
@@ -26,12 +43,12 @@ std::string	Product::getName() const
   return name;
 }
 
-double	Product::getPrice() const
+std::string	Product::getPrice() const
 {
   return price;
 }
 
-int	Product::getStock() const
+std::string	Product::getStock() const
 {
   return stock;
 }
@@ -46,13 +63,13 @@ void	Product::setName(std::string new_name)
   this->name = new_name;
 }
 
-void	Product::setPrice(double new_price)
+void	Product::setPrice(std::string new_price)
 {
   this->price = new_price;
 }
 
 
-void	Product::setStock(int new_stock)
+void	Product::setStock(std::string new_stock)
 {
   this->stock = new_stock;
 }
