@@ -2,10 +2,9 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #3
-# This program displays the information given
-# to instances of classes derived from the
-# Assignment2's Product class.
+# Assignment #4
+# This program reads data from books.txt and dvd.txt
+# and displays it, along with the value of static member variables.
 *********************************************/
 
 #ifndef BOOK_H
