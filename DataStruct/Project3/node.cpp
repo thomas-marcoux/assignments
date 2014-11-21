@@ -76,9 +76,8 @@ void	Node::printInfix() const
   Node*	r = this->getRightChild();
 
   l->printInfix();
-  std::cout << this->getValue();
+  std::cout << this->getValue() << " ";
   r->printInfix();
-  std::cout << " ";
 }
 
 void	Node::printPostfix() const
@@ -90,17 +89,20 @@ void	Node::printPostfix() const
 
   l->printPostfix();
   r->printPostfix();
-  std::cout << this->getValue();
-  std::cout << " ";
+  std::cout << this->getValue() << " ";
 }
 
 void	Node::printPrefix() const
 {
-  Node*	l = this->getLeftChild();
-  Node*	r = this->getRightChild();
+  /*
+  Node*	l = this;
+  Node*	r = this;
 
-  while (0)
+  while (l && r)
     {
-
+      std::cout << l->getValue() << " ";
+      l = l->getLeftChild();
+      r = r->getRightChild();
     }
+  */
 }
