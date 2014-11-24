@@ -3,6 +3,10 @@
 #include "banker.h"
 #include "customer.h"
 
+
+/*
+struct
+*/
 //available amount of each resource
 int	available[NUMBER_OF_RESOURCES];	
 //maximum demand of each customer
