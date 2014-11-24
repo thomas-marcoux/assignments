@@ -24,7 +24,7 @@ int	main()
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     {
       pthread_create(&customers[i], &attr, &customerFunc, &i);
-      pthread_join(customers[i], NULL);
+      //pthread_join(customers[i], NULL);
     }
   pthread_join(banker, NULL);
   return 1;

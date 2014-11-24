@@ -21,6 +21,6 @@ void*	customerFunc(void *p)
   i = p;
   srand(time(NULL));
   printf("Thread %d working\n", *i);
-  printf("Random %d\n", rand() % 2);
+  //printf("Random %d\n", rand() % 2);
   return NULL;
 }
