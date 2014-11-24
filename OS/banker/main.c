@@ -3,6 +3,15 @@
 #include "banker.h"
 #include "customer.h"
 
+//available amount of each resource
+int	available[NUMBER_OF_RESOURCES];	
+//maximum demand of each customer
+int	maximum[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
+//amount currently allocated to each customer
+int	allocation[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
+//remaining need of each customer
+int	need[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
+
 void*	dummy(void *p)
 {
   int	*i;
@@ -21,10 +30,10 @@ int	main()
   pthread_attr_init(&attr);
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     {
-      printf("Looping %d\n", i);
       pthread_create(&customers[i], &attr, &dummy, &i);
+      pthread_join(customers[i], NULL);
     }
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
-    pthread_join(customers[i], NULL);
+    ;
   return 1;
 }
