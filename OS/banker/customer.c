@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 #include "banker.h"
 #include "customer.h"
 
@@ -20,7 +21,11 @@ void*	customerFunc(void *p)
 
   i = p;
   srand(time(NULL));
-  printf("Thread %d working\n", *i);
-  //printf("Random %d\n", rand() % 2);
+  while (1)
+    {
+      printf("Thread %d working\n", *i);
+      //printf("Random %d\n", rand() % 2);
+      sleep(1);
+    }
   return NULL;
 }

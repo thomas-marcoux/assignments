@@ -22,12 +22,13 @@ int	main()
   pthread_t		banker;
   pthread_attr_t	attr;
   int			i;
-
+  int	arr[NUMBER_OF_CUSTOMERS];
   pthread_attr_init(&attr);
   pthread_create(&banker, &attr, &bankerFunc, NULL);
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     {
-      pthread_create(&customers[i], &attr, &customerFunc, &i);
+      arr[i] = i;
+      pthread_create(&customers[i], &attr, &customerFunc, &arr[i]);
       //pthread_join(customers[i], NULL);
     }
   pthread_join(banker, NULL);
