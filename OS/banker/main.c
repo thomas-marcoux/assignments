@@ -12,28 +12,20 @@ int	allocation[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 //remaining need of each customer
 int	need[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 
-void*	dummy(void *p)
-{
-  int	*i;
-
-  i = p;
-  printf("Thread %d working\n", *i);
-  return NULL;
-}
-
 int	main()
 {
   pthread_t		customers[NUMBER_OF_CUSTOMERS];
+  pthread_t		banker;
   pthread_attr_t	attr;
   int			i;
 
   pthread_attr_init(&attr);
+  pthread_create(&banker, &attr, &bankerFunc, NULL);
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     {
-      pthread_create(&customers[i], &attr, &dummy, &i);
+      pthread_create(&customers[i], &attr, &customerFunc, &i);
       pthread_join(customers[i], NULL);
     }
-  for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
-    ;
+  pthread_join(banker, NULL);
   return 1;
 }
