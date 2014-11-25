@@ -13,7 +13,7 @@ int	allocation[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 //remaining need of each customer
 int	need[NUMBER_OF_CUSTOMERS][NUMBER_OF_RESOURCES];
 
-void*	bankerFunc(void*);
+int	bankerFunc(void);
 void*	customerFunc(void *p);
 
 #endif

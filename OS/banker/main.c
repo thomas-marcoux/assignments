@@ -24,7 +24,6 @@ void	init_globals(char **argv)
 int	main(int argc, char **argv)
 {
   pthread_t		customers[NUMBER_OF_CUSTOMERS];
-  pthread_t		banker;
   pthread_attr_t	attr;
   int			i;
   int			arr[NUMBER_OF_CUSTOMERS];
@@ -36,7 +35,6 @@ int	main(int argc, char **argv)
     }
   init_globals(argv);
   pthread_attr_init(&attr);
-  pthread_create(&banker, &attr, &bankerFunc, NULL);
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     {
       arr[i] = i;
@@ -44,6 +42,5 @@ int	main(int argc, char **argv)
     }
   for (i = 0; i < NUMBER_OF_CUSTOMERS; ++i)
     pthread_join(customers[i], NULL);
-  pthread_join(banker, NULL);
   return 1;
 }

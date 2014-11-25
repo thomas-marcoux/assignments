@@ -5,7 +5,7 @@
 
 pthread_mutex_t	mutex;
 
-void*	bankerFunc(void* p)
+int	bankerFunc()
 {
   pthread_mutex_init(&mutex, NULL);
   while (1)
@@ -15,5 +15,5 @@ void*	bankerFunc(void* p)
       sleep(2);
       pthread_mutex_unlock(&mutex);
     }
-  return NULL;
+  return 1;
 }
