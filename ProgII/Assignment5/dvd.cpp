@@ -22,7 +22,8 @@ dvd::dvd(std::string name, std::string price, std::string stock,
 
 void	dvd::print_info() const
 {
-  std::cout << "DVD" << std::endl;
+  std::cout << "DVD Info" << std::endl
+	    << "---------------------" << std::endl;
   Product::print_info();
   std::cout << "Movie Studio: " << this->studio << std::endl
 	    << "Male Lead: " << this->mLead << std::endl

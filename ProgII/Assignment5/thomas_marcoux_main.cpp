@@ -15,10 +15,10 @@
 
 std::ostream&	operator<<(std::ostream& out, Product const& p)
 {
-  out << "Id: " << p.id << std::endl
-      << "Name: " << p.name << std::endl
-      << "Price: $" << p.price << std::endl
-      << "# in stock: " << p.stock << std::endl;
+  out << "Product Id: " << p.id << std::endl
+      << "Product Name: " << p.name << std::endl
+      << "Product Price: $" << p.price << std::endl
+      << "Number in stock: " << p.stock << std::endl;
   return out;
 }
 
@@ -73,18 +73,23 @@ void	write_dvds(std::string dvd_file_name, std::vector<dvd*> &my_dvds)
 
 void	add_book(std::vector<book*> &my_books)
 {
-
+  book	*b = new book();
+  std::cin >> *b;
+  my_books.push_back(b);
 }
 
 void	add_dvd(std::vector<dvd*> &my_dvds)
 {
-
+  dvd	*d = new dvd();
+  std::cin >> *d;
+  my_dvds.push_back(d);
 }
 
 template<class T>
 void	print_product_vector(std::vector<T*> my_products)
 {
-
+  for(int i = 0; i < my_products.size(); i++)
+    my_products[i]->print_info();
 }
 
 int	main()
@@ -93,11 +98,21 @@ int	main()
   std::vector<dvd*>	all_dvds;
   std::string		book_file_name = "books.txt";
   std::string		dvd_file_name = "dvds.txt";
+  std::string		input;
+  bool			running = true;
 
-  read_books(book_file_name, all_books);
-  read_dvds(dvd_file_name, all_dvds);
-  write_books(book_file_name, all_books);
-  write_dvds(dvd_file_name, all_dvds);
+  while (running)
+    {
+      std::cout << "Enter a number to manage inventory" << std::endl
+		<< "1.) See all books in stock" << std::endl
+		<< "2.) See all DVDs in stock" << std::endl
+		<< "3.) Add a book to stock" << std::endl
+		<< "4.) Add a DVD to stock" << std::endl
+		<< "5.) Quit program" << std::endl;
+      std::cin >> input;
+      //call function given input
+      running = false;
+    }
   for(int i = 0; i < all_books.size(); i++)
     delete all_books[i];
   for(int i = 0; i < all_dvds.size(); i++)
