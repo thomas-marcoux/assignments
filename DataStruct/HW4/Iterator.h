@@ -44,7 +44,7 @@ bool	Iterator<T>::end()
 template<class T>
 T	Iterator<T>::get_current()
 {
-  return (_vector[_index];
+  return (*_vector)[_index];
 }
 
 #endif
