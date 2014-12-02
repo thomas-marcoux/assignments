@@ -22,9 +22,10 @@ class	dvd : public Product
  public:
   dvd();
   dvd(std::string, std::string, std::string);
-  dvd(std::string, std::string, std::string,
-      std::string, std::string, std::string);
+  dvd(std::string, std::string, std::string, std::string, std::string, std::string);
   void	print_info(void) const;
+  friend std::ostream& operator<<(std::ostream& out, dvd const& o);
+  friend std::istream& operator>>(std::istream& out, dvd &o);
 };
 
 #endif

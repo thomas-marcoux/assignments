@@ -22,9 +22,10 @@ class	book : public Product
  public:
   book();
   book(std::string, std::string, std::string);
-  book(std::string, std::string, std::string,
-       std::string, std::string, std::string);
+  book(std::string, std::string, std::string, std::string, std::string, std::string);
   void	print_info(void) const;
+  friend std::ostream& operator<<(std::ostream& out, book const& o);
+  friend std::istream& operator>>(std::istream& out, book &o);
 };
 
 #endif

@@ -28,3 +28,31 @@ void	dvd::print_info() const
 	    << "Male Lead: " << this->mLead << std::endl
 	    << "Female Lead: " << this->fLead << std::endl;
 }
+
+std::ostream&	operator<<(std::ostream& out, dvd const& o)
+{
+  out << o.name << std::endl
+      << o.price << std::endl
+      << o.stock << std::endl
+      << o.studio << std::endl
+      << o.mLead << std::endl
+      << o.fLead << std::endl;
+  return out;
+}
+
+std::istream&	operator>>(std::istream& in, dvd &o)
+{
+  std::cout << "Name: ";
+  in >> o.name;
+  std::cout << "Price: ";
+  in >> o.price;
+  std::cout << "Stock: ";
+  in >> o.stock;
+  std::cout << "Studio: ";
+  in >> o.studio;
+  std::cout << "Male lead: ";
+  in >> o.mLead;
+  std::cout << "Female lead: ";
+  in >> o.fLead;
+  return in;
+}

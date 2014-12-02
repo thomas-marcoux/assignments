@@ -28,3 +28,31 @@ void	book::print_info() const
 	    << "Author: " << this->author << std::endl
 	    << "ISBN: " << this->isbn << std::endl;
 }
+
+std::ostream&	operator<<(std::ostream& out, book const& o)
+{
+  out << o.name << std::endl
+      << o.price << std::endl
+      << o.stock << std::endl
+      << o.publisher << std::endl
+      << o.author << std::endl
+      << o.isbn << std::endl;
+  return out;
+}
+
+std::istream&	operator>>(std::istream& in, book &o)
+{
+  std::cout << "Name: ";
+  in >> o.name;
+  std::cout << "Price: ";
+  in >> o.price;
+  std::cout << "Stock: ";
+  in >> o.stock;
+  std::cout << "Publisher: ";
+  in >> o.publisher;
+  std::cout << "Author: ";
+  in >> o.author;
+  std::cout << "ISBN: ";
+  in >> o.isbn;
+  return in;
+}
