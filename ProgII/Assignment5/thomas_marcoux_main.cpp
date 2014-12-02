@@ -103,16 +103,27 @@ int	main()
 
   while (running)
     {
+      input = "";
       std::cout << "Enter a number to manage inventory" << std::endl
 		<< "1.) See all books in stock" << std::endl
 		<< "2.) See all DVDs in stock" << std::endl
 		<< "3.) Add a book to stock" << std::endl
 		<< "4.) Add a DVD to stock" << std::endl
-		<< "5.) Quit program" << std::endl;
+		<< "0.) Quit program" << std::endl;
       std::cin >> input;
-      //call function given input
-      running = false;
+      if (input == "1")
+	print_product_vector(all_books);
+      if (input == "2")
+	print_product_vector(all_dvds);
+      if (input == "3")
+	add_book(all_books);
+      if (input == "4")
+	add_dvd(all_dvds);
+      if (input == "0")
+	running = false;
     }
+  write_books(book_file_name, all_books);
+  write_dvds(dvd_file_name, all_dvds);
   for(int i = 0; i < all_books.size(); i++)
     delete all_books[i];
   for(int i = 0; i < all_dvds.size(); i++)
