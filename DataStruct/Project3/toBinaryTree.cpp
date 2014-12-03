@@ -1,13 +1,15 @@
 /* CPSC2380 
  * Department of Computer Science, UALR 
- * Project 2 
+ * Project 3
  * Student Name: Thomas Marcoux
  * Student UALR ID (last four digits): 5564
  * Project Descriptions: 
  * This project takes an arithmetic expression as input,
- * converts it to postfix and evaluates it, outputting the result.
- * Project Due Date: 11/4/2014 
- * Project Revised Date: 8/30/2014, 11/3/2014 
+ * converts it to postfix, then to a binary tree which it prints
+ * along with its infix, postfix and prefix expression
+ * as well as the evaulation of the tree.
+ * Project Due Date: 12/4/2014 
+ * Project Revised Date: 11/30/2014, 12/03/2014 
  */
 
 #include <stack>
