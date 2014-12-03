@@ -2,9 +2,10 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #4
-# This program reads data from books.txt and dvd.txt
-# and displays it, along with the value of static member variables.
+# Assignment #5
+# This program reads data from books.txt and dvd.txt,
+# it then prompts the user for displaying the list of or and dvds
+# or adding new objects to the lists.
 *********************************************/
 
 #include "product.h"
@@ -101,6 +102,8 @@ int	main()
   std::string		input;
   bool			running = true;
 
+  read_books(book_file_name, all_books);
+  read_dvds(dvd_file_name, all_dvds);
   while (running)
     {
       input = "";

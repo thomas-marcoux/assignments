@@ -2,9 +2,10 @@
 # Thomas Marcoux
 # Programming II
 # Fall 2014
-# Assignment #4
-# This program reads data from books.txt and dvd.txt
-# and displays it, along with the value of static member variables.
+# Assignment #5
+# This program reads data from books.txt and dvd.txt,
+# it then prompts the user for displaying the list of or and dvds
+# or adding new objects to the lists.
 *********************************************/
 
 #include "book.h"
@@ -43,11 +44,11 @@ std::ostream&	operator<<(std::ostream& out, book const& o)
 
 std::istream&	operator>>(std::istream& in, book &o)
 {
-  std::cout << "Name: ";
+  std::cout << "Book Name: ";
   in >> o.name;
   std::cout << "Price: ";
   in >> o.price;
-  std::cout << "Stock: ";
+  std::cout << "Number in Stock: ";
   in >> o.stock;
   std::cout << "Publisher: ";
   in >> o.publisher;
