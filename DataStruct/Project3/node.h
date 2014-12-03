@@ -34,7 +34,7 @@ class	Node
   void	printTree(int = 0) const;
   void	printInfix(void) const;
   void	printPostfix(void) const;
-  void	printPrefix(void) const;
+  void	printPrefix(void);
 };
 
 #endif

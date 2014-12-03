@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <stack>
 #include "node.h"
 
 Node::Node(std::string value)
@@ -92,17 +93,24 @@ void	Node::printPostfix() const
   std::cout << this->getValue() << " ";
 }
 
-void	Node::printPrefix() const
+void	Node::printPrefix()
 {
-  /*
-  Node*	l = this;
-  Node*	r = this;
+  std::stack<Node*>	stk;
+  Node*			node = this;
 
-  while (l && r)
+  while (!stk.empty() || node)
     {
-      std::cout << l->getValue() << " ";
-      l = l->getLeftChild();
-      r = r->getRightChild();
+      if (node)
+	{
+	  std::cout << node->getValue() << " ";
+	  if (node->getRightChild())
+	    stk.push(node->getRightChild());
+	  node = node->getLeftChild();
+	}
+      else
+	{
+	  node = stk.top();
+	  stk.pop();
+	}
     }
-  */
 }

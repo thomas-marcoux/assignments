@@ -17,55 +17,25 @@
 Node*	toBinaryTree(TokenList* tl);
 int	evalBinaryTree(Node* root);
 
-//If an input is given, evaluates the input; if not, evaluates the array s
-int	main(int argc, char **argv)
+int	main()
 {
-  std::string	s[] = {
-    "2+2",
-    "+",
-    ")",
-    "(",
-    "42",
-    "4 2",
-    "4/2",
-    "(4/2",
-    "4//2",
-    "4/2)",
-    "(4/2))",
-    "4/0",
-    "004*003",
-    "1+2-4",
-    "10*(2+3)",
-    "10/3+2-(5*(2-3))+45",
-    "3-4 5",
-    "(2*3)+(5-(3*2))",
-    "((((6/0003) + 2) * 003) - 3)",
-    "6*(3+1$)"
-  };
   TokenList	*postFix;
-  int	n = 20;
-  Node	*root;
+  Node		*root;
+  std::string	input;
 
-  if (argc == 2)
+  while(1)
     {
-      n = 1;
-      s[0] = argv[1];
-    }
-  if (argc > 2)
-    {
-      std::cout << "Usage: " << argv[0] << " <expression>" << std::endl;
-      return 0;
-    }
-  for (int i = 0; i < n; ++i)
-    {
-      std::cout << i+1 << " : "	<< "'" << s[i] << "'" << std::endl;
-      TokenList	l = TokenList(s[i]);
+      input = "";
+      std::cin >> input;
+      if (input == "" || input == "quit" || input == "exit")
+	return 1;
+      TokenList	l = TokenList(input);
       postFix = toPostfix(&l);
       if (postFix)
 	{
 	  root = toBinaryTree(postFix);
-	  //std::cout << "Tree = " << std::endl;
-	  //root->printTree();
+	  std::cout << "Tree = " << std::endl;
+	  root->printTree();
 	  std::cout << "Infix = " << std::endl;
 	  root->printInfix();
 	  std::cout << std::endl << "Postfix = " << std::endl;

@@ -56,7 +56,7 @@ bool	isToken(char);
 bool	isNum(std::string);
 bool	checkTokenList(const TokenList*);
 
-/* eval */
+/* Evaluation */
 int	getNum(std::string s);
 int	evalPostfix(TokenList*);
 
