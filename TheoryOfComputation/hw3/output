@@ -1,0 +1,13 @@
+aabbaabaaa : SUCCESS
+abbbaaba : FAILURE (Even number of Bs)
+abbabb : FAILURE (Even number of Bs)
+babbaa : FAILURE (Does not begin with an a)
+bbb : FAILURE (Does not begin with an a)
+aaaa : FAILURE (Even number of Bs)
+aaaaba : SUCCESS
+abaaaabbabbba : FAILURE (Even number of Bs)
+aacaba : FAILURE (Wrong symbol)
+qbbba : FAILURE (Wrong symbol)
+abbaz : FAILURE (Wrong symbol)
+abababbbabbaa : SUCCESS
+abbab : FAILURE (Does not end with an a)
