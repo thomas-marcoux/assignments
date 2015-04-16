@@ -1,16 +1,6 @@
+#include <string.h>
 #include <stdio.h>
-
-int	eval(char *expr);
-
-int	isOperator(char c)
-{
-  return (c == '+' || c == '-' || c == '*' || c == '/');
-}
-
-int	isDigit(char c)
-{
-  return (c >= 48 && c <= 57);
-}
+#include "parser.h"
 
 int	isValid(char *c)
 {
@@ -18,9 +8,9 @@ int	isValid(char *c)
 
   for (i = 0, j = 0; c[i]; ++i)
     {
-      if (!isDigit(c[i]) && !isOperator(c[i]))
+      if (!IS_DIGIT(c[i]) && !IS_OPERATOR(c[i]))
 	return 2;
-      isDigit(c[i]) ? ++j : --j;
+      IS_DIGIT(c[i]) ? ++j : --j;
       if (j < 1)
 	return 0;
     }
@@ -36,7 +26,7 @@ int	parser(char *expr)
   printf("%s %s\n", expr, ret_message[ret]);
   if (ret != 1)
     return 0;
-  value = eval(expr);
-  printf("%s = %d\n", expr, value);
+  value = eval(expr, 0, strlen(expr) - 1);
+  printf(" = %d\n", value);
   return 1;
 }
