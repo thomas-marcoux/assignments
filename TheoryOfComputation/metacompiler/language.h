@@ -5,8 +5,7 @@
 #include <map>
 #include <string>
 
-#define DEFAULT_INPUT_FILE	"input.txt"
-#define DEFAULT_LANGUAGE_FILE	"language.txt"
+#define DEFAULT_LANGUAGE_FILE	".language.meta"
 #define	DEFAULT_STATE		0
 #define	ERROR_STATE		10000
 #define	ERROR_WRONG_SYMBOL	ERROR_STATE
@@ -27,6 +26,7 @@ class	Language
   bool	alphabet_is_correct(std::string);
   int	parse(std::string, int);
   int	parse(std::ifstream&);
+  void	output();
 };
 
 #endif

@@ -4,13 +4,17 @@
 
 int	main(int argc, char *argv[])
 {
-  if (argc != 2)
-    return 0;
-  std::ifstream	lang_if, input(DEFAULT_INPUT_FILE);
-  std::string	language_file = argv[1];
-  lang_if.open(language_file.c_str(), std::fstream::in);
-
+  std::string	input_file;
+  if (argc < 2)
+    {
+      std::cout << "Error" << std::endl;
+      return 0;
+    }
+  else
+    input_file = argv[1];
+  std::ifstream	lang_if(DEFAULT_LANGUAGE_FILE), input;
   Language	l(lang_if);
+  input.open(input_file.c_str(), std::fstream::in);
   l.parse(input);
   lang_if.close();
   input.close();

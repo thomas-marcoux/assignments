@@ -1,13 +1,14 @@
 NAME=	metacompiler
 
+META=	.language.meta
+
 CC=	g++
 
 CFLAGS=	-c -Wall -g
 
 RM=	rm -fv
 
-SRC=	language.cpp		\
-	main.cpp
+SRC=	main_meta.cpp
 
 OBJ=	$(SRC:.cpp=.o)
 
@@ -18,6 +19,6 @@ clean:
 	$(RM) $(OBJ)
 
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(META)
 
 re:	fclean all
