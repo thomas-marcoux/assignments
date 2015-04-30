@@ -1,13 +1,12 @@
 #include <iostream>
 #include "language.h"
 
-
 int	main(int argc, char *argv[])
 {
   std::string	input_file;
-  if (argc < 2)
+  if (argc != 2)
     {
-      std::cout << "Error" << std::endl;
+      std::cout << "Usage: " << argv[0] << "input_file" << std::endl;
       return 0;
     }
   else

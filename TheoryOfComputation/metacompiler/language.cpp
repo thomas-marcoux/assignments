@@ -1,7 +1,7 @@
 #include <iostream>
-#include <unistd.h>
 #include "language.h"
 
+//Read from in and map states to the transition matrix
 Language::Language(std::ifstream &in)
 {
   in >> alphabet >> states >> nb_symbols;
@@ -19,6 +19,7 @@ Language::~Language()
   delete[] matrix;
 }
 
+//State Transition Machine
 int	Language::parse(std::string s, int current_state)
 {
   if (current_state >= ERROR_STATE || !s.length())
@@ -26,6 +27,7 @@ int	Language::parse(std::string s, int current_state)
   return parse(s.substr(1, s.length() - 1), matrix[current_state][s[0]]);
 }
 
+//Returns true if the string is composed of the language's alphabet
 bool	Language::alphabet_is_correct(std::string s)
 {
   for (int i = 0, l = s.length(); i < l; ++i)
@@ -34,6 +36,7 @@ bool	Language::alphabet_is_correct(std::string s)
   return true;
 }
 
+//Parse all the strings from in and outputs the results
 int	Language::parse(std::ifstream &in)
 {
   int	key;

@@ -2,15 +2,14 @@
 #include <unistd.h>
 #include "language.h"
 
-#define NAME	"metacompiler"
-
+//Copies Language file to DEFAULT_LANGUAGE_FILE and compile compiler sources.
 int	main(int argc, char *argv[])
 {
   int	pid;
 
-  if (argc < 2)
+  if (argc != 2)
     {
-      std::cout << "Error" << std::endl;
+      std::cout << "Usage: " << argv[0] << " language_file" << std::endl;
       return 0;
     }
   pid = fork();
