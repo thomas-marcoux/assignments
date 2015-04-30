@@ -1,0 +1,11 @@
+ab
+4 2
+1 10001
+1 2
+3 1
+3 1
+0 Empty string not allowed.
+1 String must contain an odd number of b's.
+2 String must end with a.
+3 String is accepted.
+10001 String must begin with a.
